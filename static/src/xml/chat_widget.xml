@@ -2,61 +2,65 @@
 <templates xml:space="preserve">
 
 <t t-name="custom_chat_ui.ChatWidget" owl="1">
+    <div t-ref="chatWidget">
 
-<div>
-    <!-- Floating Button -->
-    <div t-on-click="toggleChat"
-         style="position:fixed; bottom:20px; right:20px; width:50px; height:50px; background:#875A7B; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:9999;">
-        💬
-    </div>
-
-    <!-- Chat Window -->
-    <t t-if="state.open">
-        <div style="
-            position:fixed;
-            bottom:80px;
-            right:20px;
-            width:30em;
-            height:25em;
-            max-height:50em;
-            background:white;
-            border-radius:10px;
-            box-shadow:0 4px 20px rgba(0,0,0,0.2);
-            display:flex;
-            flex-direction:column;
-            overflow:hidden;
-            z-index:9999;
-        ">
-            <!-- Header -->
-            <div style="background:#875A7B; color:white; padding:10px; font-weight:bold;">
-                AI Assistant
-            </div>
-
-            <!-- Messages -->
-            <div style="flex:1; padding:10px; overflow:auto;">
-                <t t-foreach="state.messages" t-as="msg" t-key="msg">
-                    <div style="text-align:right; margin:5px;">
-                        <b>You:</b> <t t-esc="msg.user"/>
-                    </div>
-                    <div style="text-align:left; margin:5px;">
-                        <b>Bot:</b> <t t-esc="msg.bot"/>
-                    </div>
-                </t>
-            </div>
-
-            <!-- Input -->
-            <div style="display:flex; border-top:1px solid #ccc;">
-            <input 
-    t-model="state.input" 
-    placeholder="Type a message..." 
-    t-on-keyup="handleKeyUp"
-    style="flex:1; padding:10px; border:none;"
-/>
-                <button t-on-click="sendMessage" style="background:#875A7B; color:white; border:none; padding:10px;">Send</button>
-            </div>
+        <!-- Floating Button -->
+        <div t-on-click="toggleChat"
+             style="position:fixed; bottom:20px; right:20px; width:50px; height:50px; background:#875A7B; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:9999;">
+            💬
         </div>
-    </t>
-</div>
 
+        <!-- Chat Window -->
+        <t t-if="state.open">
+            <div style="
+                position:fixed;
+                bottom:80px;
+                right:20px;
+                width:30em;
+                height:25em;
+                max-height:50em;
+                background:white;
+                border-radius:10px;
+                box-shadow:0 4px 20px rgba(0,0,0,0.2);
+                display:flex;
+                flex-direction:column;
+                overflow:hidden;
+                z-index:9999;
+            ">
+                <!-- Header -->
+                <div style="background:#875A7B; color:white; padding:10px; font-weight:bold;">
+                    AI Assistant
+                </div>
+
+                <!-- Messages -->
+                <div style="flex:1; padding:10px; overflow:auto;">
+                    <t t-foreach="state.messages" t-as="msg" t-key="msg">
+                        <div style="text-align:right; margin:5px;">
+                            <b>You:</b> <t t-esc="msg.user"/>
+                        </div>
+                        <div style="text-align:left; margin:5px;">
+                            <b>Bot:</b> <t t-esc="msg.bot"/>
+                        </div>
+                    </t>
+                </div>
+
+                <!-- Input -->
+                <div style="display:flex; border-top:1px solid #ccc;">
+                    <input 
+                        t-model="state.input" 
+                        placeholder="Type a message..." 
+                        t-on-keyup="handleKeyUp"
+                        style="flex:1; padding:10px; border:none;"
+                    />
+                    <button t-on-click="sendMessage"
+                        style="background:#875A7B; color:white; border:none; padding:10px;">
+                        Send
+                    </button>
+                </div>
+
+            </div>
+        </t>
+
+    </div>
 </t>
 </templates>
