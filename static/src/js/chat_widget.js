@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { Component, useState, onMounted } from "@odoo/owl";
+import { Component, useState, onMounted, useRef} from "@odoo/owl";
 import { registry } from "@web/core/registry";
 
 export class ChatWidget extends Component {
@@ -10,9 +10,21 @@ export class ChatWidget extends Component {
             messages: [],
             input: "",
         });
+        this.chatRef = useRef("chatWidget");
+
+        onMounted(() => {
+            document.addEventListener("click", (ev) => {
+                const el = this.chatRef.el;
+
+                if (this.state.open && el && !el.contains(ev.target)) {
+                    this.state.open = false;
+                }
+            });
+        });
     }
 
-    toggleChat() {
+    toggleChat(ev) {
+        ev.stopPropagation(); // prevent document click
         this.state.open = !this.state.open;
     }
 
